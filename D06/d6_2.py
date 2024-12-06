@@ -1,8 +1,7 @@
-import copy
-import numpy as np
-
-from D06.Map import Map
+from AoCInputHelper import fetch_input
 from D06.Direction import Direction
+from D06.Map import Map
+
 
 def generate_possible_loop_maps(original_map: list[list[chr]]) -> list[Map]:
     base_map: list[list[chr]] = [row[:] for row in original_map]
@@ -14,12 +13,12 @@ def generate_possible_loop_maps(original_map: list[list[chr]]) -> list[Map]:
     map_with_path.move()
 
     possible_loop_maps: list[Map] = []
-    #Walls can only be placed along the path => rest can be ignored
+    # Walls can only be placed along the path => rest can be ignored
     for y in range(map_with_path.get_height()):
         for x in range(map_with_path.get_width()):
             values: list[chr] = Direction.get_str_values()
             if map_with_path.get_value(x, y) in values:
-                if not(x == start_x and y == start_y):
+                if not (x == start_x and y == start_y):
                     clone: list[list[chr]] = [row[:] for row in base_map]
                     clone[y][x] = "#"
                     cloned_map: Map = Map(clone)
@@ -28,10 +27,12 @@ def generate_possible_loop_maps(original_map: list[list[chr]]) -> list[Map]:
                     print("Startpunkt", x, y)
 
     return possible_loop_maps
+
+
 pattern: str = r"(^)"
 
-with open('input_1.txt', 'r') as file:
-    map = [line.strip() for line in file]
+input_data: str = fetch_input(2024, 6)
+map = [line.strip() for line in input_data.split("\n")]
 
 count: int = 0
 

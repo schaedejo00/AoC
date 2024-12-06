@@ -166,3 +166,6 @@ cython_debug/
 # https://old.reddit.com/r/adventofcode/wiki/faqs/copyright/inputs
 input*.txt
 example*.txt
+
+#Ignore secret files
+session-key
