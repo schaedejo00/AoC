@@ -41,11 +41,10 @@ maps: list[Map] = generate_possible_loop_maps(map_list)
 print("Generated", len(maps), "maps")
 
 for index, current_map in enumerate(maps):
-    print("Index", index)
+    print("Map-Nr.", index)
     current_map = current_map.move()
     if current_map.has_loop():
         print(count, "Loops detected")
         count += 1
-    print("next candidate processed.")
 
 print(count)
