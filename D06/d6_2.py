@@ -14,7 +14,7 @@ def generate_possible_loop_maps(original_map: list[list[chr]]) -> list[Map]:
     map_with_path.move()
 
     possible_loop_maps: list[Map] = []
-
+    #Walls can only be placed along the path => rest can be ignored
     for y in range(map_with_path.get_height()):
         for x in range(map_with_path.get_width()):
             values: list[chr] = Direction.get_str_values()
@@ -44,7 +44,7 @@ for index, current_map in enumerate(maps):
     print("Map-Nr.", index)
     current_map = current_map.move()
     if current_map.has_loop():
-        print(count, "Loops detected")
         count += 1
+        print(count, "Loops detected")
 
 print(count)
