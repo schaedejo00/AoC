@@ -1,9 +1,7 @@
 import numpy as np
 import numpy.typing as npt
 
-coordinates: npt.NDArray[np.int32] = None
-with open('input_1.txt', 'r') as f:
-    coordinates = np.loadtxt('input_1.txt', usecols=(0, 1), dtype=int)
+coordinates: npt.NDArray[np.int32] = np.loadtxt('input_1.txt', usecols=(0, 1), dtype=int)
 
 coordinates.sort(axis=0)
 print(coordinates)
