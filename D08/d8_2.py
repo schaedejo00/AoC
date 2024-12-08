@@ -3,17 +3,17 @@ from AoCInputHelper import get_grid, remove_entries_by_value, get_input, is_on_g
 # prepare input
 input_data: dict[tuple[int, int], str]
 input_data, nr, nc = get_grid(get_input(2024, 8))
-antennas: dict[str, tuple[int, int]] = remove_entries_by_value(input_data, '.')
-antenna_locations: dict[str, set[tuple[int, int]]] = dict()
-for location, antenna in antennas.items():
-    if antenna_locations.get(antenna) is None:
-        antenna_locations[antenna] = set()
-    antenna_locations[antenna].add(location)
+data: dict[str, tuple[int, int]] = remove_entries_by_value(input_data, '.')
+frequency_locations: dict[str, set[tuple[int, int]]] = dict()
+for location, antenna in data.items():
+    if frequency_locations.get(antenna) is None:
+        frequency_locations[antenna] = set()
+    frequency_locations[antenna].add(location)
 
 # Find antinode locations
 antinode_locations: set(tuple[int, int]) = set()
-for antenna, locations in antenna_locations.items():
-    print(f"Antenna {antenna} has {len(locations)} locations")
+for frequency, locations in frequency_locations.items():
+    print(f"Frequency {frequency} is broadcast from {len(locations)} locations")
     for location in locations:
         current_location: tuple[int, int] = location
         for interfering_location in locations:
