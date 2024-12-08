@@ -10,7 +10,7 @@ session_cookie = os.getenv("AOC_SESSION")
 
 
 # Function to fetch input for a specific year and day
-def fetch_input(year: int, day: int) -> str:
+def get_input(year: int, day: int) -> str:
     try:
         return open("input").read()
     except FileNotFoundError:
