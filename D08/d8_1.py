@@ -3,7 +3,7 @@ from AoCInputHelper import get_grid, remove_entries_by_value, get_input, is_on_g
 # prepare input
 input_data: dict[tuple[int, int], str]
 input_data, nr, nc = get_grid(get_input(2024, 8))
-data: dict[str, tuple[int, int]] = remove_entries_by_value(input_data, '.')
+data: dict[tuple[int, int], str] = remove_entries_by_value(input_data, '.')
 frequency_locations: dict[str, set[tuple[int, int]]] = dict()
 for location, frequency in data.items():
     if frequency_locations.get(frequency) is None:
@@ -11,7 +11,7 @@ for location, frequency in data.items():
     frequency_locations[frequency].add(location)
 
 # Find antinode locations
-antinode_locations: set(tuple[int, int]) = set()
+antinode_locations: set[tuple[int, int]] = set()
 for frequency, locations in frequency_locations.items():
     print(f"Frequency {frequency} is broadcast from {len(locations)} locations")
     for location in locations:
