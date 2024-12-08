@@ -10,7 +10,7 @@ for location, frequency in data.items():
         frequency_locations[frequency] = set()
     frequency_locations[frequency].add(location)
 
-#
+# Find antinode locations
 antinode_locations: set(tuple[int, int]) = set()
 for frequency, locations in frequency_locations.items():
     print(f"Frequency {frequency} is broadcast from {len(locations)} locations")
