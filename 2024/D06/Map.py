@@ -1,5 +1,3 @@
-from numpy.f2py.crackfortran import previous_context
-
 from D06.Direction import Direction
 
 

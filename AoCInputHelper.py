@@ -16,7 +16,7 @@ def get_input(year: int, day: int) -> str:
     except FileNotFoundError:
 
         url = BASE_URL.format(year, day)
-        cookies = {"session": open("../session-key").read().strip()}
+        cookies = {"session": open("../../session-key").read().strip()}
 
         # Make a request
         response = requests.get(url, cookies=cookies)
