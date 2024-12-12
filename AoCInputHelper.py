@@ -3,11 +3,12 @@ import os
 import requests
 
 # Base URL for Advent of Code inputs
-BASE_URL = "https://adventofcode.com/{}/day/{}/input"
+BASE_URL:str = "https://adventofcode.com/{}/day/{}/input"
 
 # Get session cookie from environment variable
-session_cookie = os.getenv("AOC_SESSION")
+session_cookie:str = os.getenv("AOC_SESSION")
 
+CORNERS: list[int] = [(0, 0), (0, 1), (1, 0), (1, 1)]
 
 # Function to fetch input for a specific year and day
 def get_input(year: int, day: int) -> str:
