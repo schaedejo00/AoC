@@ -1,29 +1,28 @@
-import sys
+
 from typing import Iterator
 
 from AoCInputHelper import *
 import re
-from sympy import factorint
 from ortools.linear_solver import pywraplp
 
-
+#third try using linear optimization
 def solve_optimization_problem(x_a:int, x_b:int, y_a:int, y_b:int, x_ges:int, y_ges:int) -> tuple[int, int, int]:
-    solver = pywraplp.Solver.CreateSolver('SCIP') #Ganzzahlige Lineare Optimierung
+    solver = pywraplp.Solver.CreateSolver('SCIP') #Integer Linear Programming
 
-    # Variablen definieren
+    #define variables
     n:int = solver.NumVar(0, solver.infinity(), 'n')
     m:int = solver.NumVar(0, solver.infinity(), 'm')
-    solver.Add(n == solver.IntVar(0, solver.infinity(), 'n_int')) #Ganzzahlige Lösung erzwingen
-    solver.Add(m == solver.IntVar(0, solver.infinity(), 'm_int')) #Ganzzahlige Lösung erzwingen
+    solver.Add(n == solver.IntVar(0, solver.infinity(), 'n_int')) #enforce integer solution
+    solver.Add(m == solver.IntVar(0, solver.infinity(), 'm_int')) #enforce integer solution
 
-    # Nebenbedingungen hinzufügen
+    #add constraints
     solver.Add(n * x_a + m * x_b == x_ges)
     solver.Add(n * y_a + m * y_b == y_ges)
 
-    # Zielfunktion definieren
+    #define objective
     solver.Minimize(3 * n + m)
 
-    # Problem lösen
+    #solve problem
     status = solver.Solve()
 
     if status == pywraplp.Solver.OPTIMAL:
@@ -35,7 +34,7 @@ def solve_optimization_problem(x_a:int, x_b:int, y_a:int, y_b:int, x_ges:int, y_
 input_data: str = get_input(2024, 13)
 #input_data: str = open('example.txt').read()
 
-
+#regex for parsing 3 line input
 pattern_a: str = r"^Button A: X(?P<x_A>[+][1-9][0-9]*), Y(?P<y_A>[+][1-9][0-9]*)$"
 pattern_b: str = r"^Button B: X(?P<x_B>[+][1-9][0-9]*), Y(?P<y_B>[+][1-9][0-9]*)$"
 pattern_prize : str = r"^Prize: X=(?P<x_prize>[1-9][0-9]*), Y=(?P<y_prize>[1-9][0-9]*)$"
@@ -48,7 +47,6 @@ for match in matches:
     coordinates_b: tuple[int, int] = (int(match.group("x_B")[1:]), int(match.group("y_B")[1:]))
     coordinates_prize: tuple[int, int] = (int(match.group("x_prize"))+10000000000000 , int(match.group("y_prize"))+10000000000000)
 
-
     n, m, cost = solve_optimization_problem(coordinates_a[0], coordinates_b[0], coordinates_a[1], coordinates_b[1], coordinates_prize[0], coordinates_prize[1])
 
     if cost is not None:
@@ -56,6 +54,5 @@ for match in matches:
         print(f"Solution found: A pressed {n} times, B pressed {m} times, cost={cost}")
         costs.append(cost)
 
-#print(f"costs={costs}, sum={sum(costs)}")
 print(f"sum={sum(costs)}")
 
