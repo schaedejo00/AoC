@@ -41,7 +41,7 @@ for j in range(seconds):
     # check if most robots are in the middle
     x:int = max_x//2
     robotCount = sum(1 for robot in robots if robot[0] <= x+15 and robot[0] >= x-15)
-    if robotCount > len(robots)*0.45:
+    if robotCount > len(robots)*0.51:
         plot(robots, max_x, max_y, j+1)
 
 
