@@ -169,3 +169,5 @@ example*.txt
 
 #Ignore secret files
 session-key
+
+#Ignore day template files
